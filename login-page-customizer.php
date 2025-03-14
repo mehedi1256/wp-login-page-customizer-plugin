@@ -88,24 +88,42 @@ function wlc_login_page_logo_input()
 // Render Custom Login Page Settings to Login Screen
 add_action("login_enqueue_scripts", "wlc_login_page_customizer_settings");
 
-function wlc_login_page_customizer_settings() {
+function wlc_login_page_customizer_settings()
+{
     $text_color = get_option("wlc_login_page_text_color", "");
     $background_color = get_option("wlc_login_page_background_color", "");
     $logo = get_option("wlc_login_page_logo", "");
 
-    ?>
+?>
     <style>
         <?php
-        if(!empty($text_color)) {
-            ?>
-            div#login,
-            a.wp-login-lost-password, 
-            p#backtoblog a {
-                color: <?php echo $text_color ?> !important;
-            }
-            <?php
+        if (!empty($text_color)) {
+        ?>div#login,
+        a.wp-login-lost-password,
+        p#backtoblog a {
+            color: <?php echo $text_color ?> !important;
         }
+
+        <?php
+        }
+        ?><?php
+            if (!empty($background_color)) {
+            ?>body.login {
+            background: <?= $background_color ?> !important;
+        }
+
+        <?php
+            }
+        ?><?php
+            if (!empty($logo)) {
+            ?>#login h1 a {
+            background-image: url("<?= $logo ?>") !important;
+            border-radius: 50px;
+        }
+
+        <?php
+            }
         ?>
     </style>
-    <?php
+<?php
 }
